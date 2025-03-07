@@ -38,8 +38,8 @@ def read_my_file(args):
     return lines
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="reading text rtf")
-    parser.add_argument("-w", "--rtf", help="text to analyze")
+    parser = argparse.ArgumentParser(description="reading text from rtf file")
+    parser.add_argument("-w", "--rtf", help="rtf_file to analyze")
     args = parser.parse_args()
 
 # Извлекаем символы другого шрифта
