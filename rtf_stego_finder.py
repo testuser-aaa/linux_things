@@ -17,8 +17,15 @@ def extract_different_font_chars(rtf_text):
     for match in matches:
         font_number, text = match
         if font_number != main_font:
-            # Если шрифт отличается от основного, добавляем символы в список
-            different_font_chars.extend(text)
+            # Убираем RTF-команды и служебные данные из текста
+            clean_text = re.sub(r'\\[a-zA-Z0-9]+', '', text)  # Удаляем все RTF-команды
+            clean_text = re.sub(r'\{.*?\}', '', clean_text)    # Удаляем блоки в {}
+            clean_text = re.sub(r'\s+', ' ', clean_text)       # Убираем лишние пробелы
+            clean_text = clean_text.strip()                    # Убираем пробелы по краям
+            
+            # Если текст не пустой, добавляем его в список
+            if clean_text:
+                different_font_chars.append(clean_text)
     
     # Возвращаем символы другого шрифта в виде строки
     return ''.join(different_font_chars)
